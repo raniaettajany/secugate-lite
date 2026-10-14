@@ -23,6 +23,31 @@ class TestAlerte(unittest.TestCase):
         with self.assertRaises(ValueError):
             choisir_canal("BIZARRE")
 
+    def test_rediger_5_lignes(self):
+        s, v = exemple()
+        lignes = rediger(s, v).split("\n")
+        self.assertEqual(len(lignes), 5)
+        self.assertEqual(lignes[0], "[CRITIQUE] Cible : web-app")
+        self.assertEqual(lignes[4], "Sources : ACCES")
+
+    def test_alerter(self):
+        s, v = exemple()
+        journal = []
+        al = alerter(s, v, journal)
+        self.assertEqual(al.canal, "TELEPHONE")
+        self.assertEqual(al.destinataire, "equipe-secu")
+        self.assertEqual(journal, [al])
+        self.assertEqual(s.statut, "ALERTE")
+
+    def test_validation(self):
+        _, v = exemple()
+        self.assertTrue(valider_action(v, " OUI "))
+        self.assertFalse(valider_action(v, "n"))
+
+    def test_validation_non_sensible(self):
+        _, v = exemple(sensible=False)
+        self.assertTrue(valider_action(v, "n"))
+
 
 if __name__ == "__main__":
     unittest.main()
