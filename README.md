@@ -4,3 +4,5 @@ Mini-plateforme de surveillance des accès d'une application trois agents (Colle
 ## Equipe
 - ETTAJANY Rania (Agent 1 - Collecte)
 - ESSABI Douae (Agent 2 - detection)
+- Ou Ben Haddou Hiba (Agent 3 - Alerte)
+
